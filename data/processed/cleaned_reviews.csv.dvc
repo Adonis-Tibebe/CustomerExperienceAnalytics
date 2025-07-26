@@ -1,0 +1,5 @@
+outs:
+- md5: 008e4aabc1f7bbfcd3aff2d4a9c3d2e5
+  size: 307590
+  hash: md5
+  path: cleaned_reviews.csv
