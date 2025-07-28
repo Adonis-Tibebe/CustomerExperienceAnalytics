@@ -40,14 +40,17 @@ project-root/
 ├── data/ 
 |   ├──processed                # contains processed datasets
 |   └──raw                      # containes raw datasets
-|       └──scraped_reviews/           # Output CSVs from scraping jobs and loggs              
+|       └──scraped_reviews/           # Output CSVs from scraping jobs and loggs             
+│           └── scraper.log
 ├── notebooks/                 # Exploratory and modeling notebooks
-├── scripts/
-│   ├── scrape_google_play_reviews.py
-│   └── README.md
-├── models/                   # Placeholder for model explainability artifacts
-├── logs/
-│   └── scraper.log
+│   ├── Data_Preprocessing.ipynb      # Initial cleaning and structuring of raw reviews
+│   ├── Sentiment_and_Thematic_Analysis.ipynb  # Sentiment scoring and thematic extraction using NLP
+│   └── README.md                     # Notebook index and summaries
+├── src/                      # Source code for reusable functions and models
+│   ├── utils/                # Data loading, cleaning, and text preprocessing utilities
+│   ├── models/               # Sentiment analysis and topic modeling modules
+│   ├── services/               # (future expansion)
+|   └──core/                    # (future expansion)
 ├── .env
 ├── requirements.txt
 └── README.md
@@ -71,4 +74,15 @@ python scripts/scrape_google_play_reviews.py
 
 ## 📘 Notebook Workspace
 
-Jupyter notebooks in the `notebooks/` directory guide inspection, cleaning, modeling, and exploratory analysis. The current preprocessing notebook initializes the review pipeline by preparing raw data for sentiment analysis. Additional notebooks will be added as analytical tasks expand.
+Jupyter notebooks in the `notebooks/` directory guide inspection, cleaning, modeling, and exploratory analysis.
+
+- `Data_Preprocessing.ipynb` initializes the review pipeline by preparing raw data for sentiment analysis.
+- `Sentiment_and_Thematic_Analysis.ipynb` performs sentiment scoring and thematic extraction using modern NLP techniques, leveraging modular functions from the `src` directory.
+
+Additional notebooks will be added as analytical tasks expand.
+
+## Recent Changes
+
+- Added `Sentiment_and_Thematic_Analysis.ipynb` for advanced sentiment and thematic analysis.
+- Refactored and modularized core functions into the `src/` directory (`utils/`, `models/`).
+- Updated `notebooks/README.md` with detailed summaries for each notebook.
