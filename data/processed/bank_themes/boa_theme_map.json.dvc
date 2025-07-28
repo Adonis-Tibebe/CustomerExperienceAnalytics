@@ -1,0 +1,5 @@
+outs:
+- md5: 0425f51691d512d74b09a10134361e51
+  size: 4399
+  hash: md5
+  path: boa_theme_map.json
