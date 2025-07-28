@@ -1,0 +1,5 @@
+outs:
+- md5: 50ebc52cf96cb95bf5a59eefb5cd42d6
+  size: 4203
+  hash: md5
+  path: dashen_theme_map.json

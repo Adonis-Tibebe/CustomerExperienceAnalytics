@@ -1,0 +1,5 @@
+outs:
+- md5: 54d1761bb7bb6318ecd039008bb8571c
+  size: 4228
+  hash: md5
+  path: cbe_theme_map.json
