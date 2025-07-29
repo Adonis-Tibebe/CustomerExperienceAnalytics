@@ -19,3 +19,16 @@ def get_base_data_dir(env_file_path='../.env'):
         raise ValueError("🚨 BASE_DATA_DIR not set in .env file.")
     
     return base_dir
+
+def get_db_credentials(env_path = "../.env"):
+    dotenv_path = os.path.join(os.path.dirname(__file__), env_path)
+    load_dotenv(dotenv_path)
+
+    ORACLE_CONFIG = {
+    "username": os.getenv("ORACLE_USERNAME"),
+    "password": os.getenv("ORACLE_PASSWORD"),
+    "host": os.getenv("ORACLE_HOST", "localhost"),
+    "port": os.getenv("ORACLE_PORT", "1521"),
+    "service_name": os.getenv("ORACLE_SERVICE", "XEPDB1")
+    }
+    return ORACLE_CONFIG

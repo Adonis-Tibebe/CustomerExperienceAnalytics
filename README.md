@@ -38,19 +38,24 @@ project-root/
 ├── config/
 │   └── settings.py
 ├── data/ 
-|   ├──processed                # contains processed datasets
-|   └──raw                      # containes raw datasets
-|       └──scraped_reviews/           # Output CSVs from scraping jobs and loggs             
+│   ├── processed/                # Contains processed datasets
+│   └── raw/                      # Contains raw datasets
+│       └── scraped_reviews/      # Output CSVs from scraping jobs and logs             
 │           └── scraper.log
-├── notebooks/                 # Exploratory and modeling notebooks
-│   ├── Data_Preprocessing.ipynb      # Initial cleaning and structuring of raw reviews
-│   ├── Sentiment_and_Thematic_Analysis.ipynb  # Sentiment scoring and thematic extraction using NLP
-│   └── README.md                     # Notebook index and summaries
-├── src/                      # Source code for reusable functions and models
-│   ├── utils/                # Data loading, cleaning, and text preprocessing utilities
-│   ├── models/               # Sentiment analysis and topic modeling modules
-│   ├── services/               # (future expansion)
-|   └──core/                    # (future expansion)
+├── notebooks/                    # Exploratory and modeling notebooks
+│   ├── Data_Preprocessing.ipynb
+│   ├── Sentiment_and_Thematic_Analysis.ipynb
+│   └── README.md
+├── scripts/                      # Utility scripts for data collection and integration
+│   ├── scrape_google_play_reviews.py   # Main script for scraping Google Play reviews
+│   ├── load_data.py                    # Script for loading data into databases or other systems
+│   ├── oracle_setup.py                 # Script for Oracle DB setup and integration
+│   └── README.md
+├── src/                          # Source code for reusable functions and models
+│   ├── utils/                    # Data loading, cleaning, and text preprocessing utilities
+│   ├── models/                   # Sentiment analysis and topic modeling modules
+│   ├── core/                     # Core logic and integrations (e.g., oracle_core.py for Oracle DB)
+│   └── services/                 # (future expansion)
 ├── .env
 ├── requirements.txt
 └── README.md
@@ -72,6 +77,17 @@ pip install -r requirements.txt
 python scripts/scrape_google_play_reviews.py
 ```
 
+**NOTE** - before running the scripts below make sure that you have created the database in oracle and set up the necessary credentials in the .env file
+
+5. Set up Oracle database and create tables
+```bash
+python scripts/oracle_setup.py
+```
+6. Load processed and raw data and bank detail into your database:
+```bash
+python scripts/load_data.py
+```
+
 ## 📘 Notebook Workspace
 
 Jupyter notebooks in the `notebooks/` directory guide inspection, cleaning, modeling, and exploratory analysis.
@@ -81,8 +97,20 @@ Jupyter notebooks in the `notebooks/` directory guide inspection, cleaning, mode
 
 Additional notebooks will be added as analytical tasks expand.
 
+### Components
+- `scrape_google_play_reviews.py`: Primary script for collecting structured review data
+- `load_data.py`: Script for loading processed data into databases or other systems
+- `oracle_setup.py`: Script for setting up and integrating with Oracle databases
+- `src/core/oracle_core.py`: Core logic for Oracle DB operations and integration
+- `config/settings.py`: Loads base directories from environment or configuration
+- `.env`: Stores project-level config variables (e.g., base output paths)
+- `notebooks/`: Contains exploratory and task-specific Jupyter notebooks
+- `src/utils/`: Reusable utilities for data loading and cleaning
+
 ## Recent Changes
 
 - Added `Sentiment_and_Thematic_Analysis.ipynb` for advanced sentiment and thematic analysis.
 - Refactored and modularized core functions into the `src/` directory (`utils/`, `models/`).
 - Updated `notebooks/README.md` with detailed summaries for each notebook.
+- Added `oracle_setup.py` and `load_data.py` scripts for database integration and data loading.
+- Added `src/core/oracle_core.py` for Oracle DB operations.
