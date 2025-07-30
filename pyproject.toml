@@ -7,7 +7,7 @@ name = "customer-experience-analytics"
 version = "0.1.0"
 description = "Banking App Review Analytics - Collect, analyze, and interpret customer reviews from mobile banking applications"
 authors = [
-    {name = "Your Name", email = "your.email@example.com"}
+    {name = "Adoniyas Tibebe", email = "adatibebe12@gmail.com"}
 ]
 readme = "README.md"
 license = {text = "MIT"}
