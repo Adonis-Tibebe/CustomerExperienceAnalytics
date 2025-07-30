@@ -3,10 +3,186 @@ requires = ["setuptools>=45", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "your-project-name"
+name = "customer-experience-analytics"
 version = "0.1.0"
-description = ""
+description = "Banking App Review Analytics - Collect, analyze, and interpret customer reviews from mobile banking applications"
+authors = [
+    {name = "Adoniyas Tibebe", email = "adatibebe12@gmail.com"}
+]
+readme = "README.md"
+license = {text = "MIT"}
 requires-python = ">=3.8"
+keywords = ["banking", "analytics", "sentiment-analysis", "nlp", "customer-experience"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "Intended Audience :: Financial and Insurance Industry",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Topic :: Scientific/Engineering :: Information Analysis",
+    "Topic :: Text Processing :: Linguistic",
+]
+
+dependencies = [
+    "pandas>=2.3.1",
+    "numpy>=2.2.6",
+    "matplotlib>=3.10.3",
+    "seaborn>=0.13.2",
+    "scikit-learn>=1.7.1",
+    "scipy>=1.15.3",
+    "nltk>=3.9.1",
+    "transformers>=4.54.0",
+    "torch>=2.7.1",
+    "google-play-scraper>=1.2.7",
+    "oracledb>=3.2.0",
+    "cx-Oracle>=8.3.0",
+    "python-dotenv>=1.1.1",
+    "requests>=2.32.4",
+    "tqdm>=4.67.1",
+    "wordcloud>=1.9.3",
+    "emoji>=2.14.1",
+    "dvc>=3.61.0",
+    "jupyter>=1.0.0",
+    "ipykernel>=6.30.0",
+    "ipython>=8.37.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.0.0",
+    "pytest-cov>=4.0.0",
+    "black>=23.0.0",
+    "flake8>=6.0.0",
+    "mypy>=1.0.0",
+    "pre-commit>=3.0.0",
+]
+notebooks = [
+    "jupyter>=1.0.0",
+    "ipykernel>=6.30.0",
+    "ipython>=8.37.0",
+    "nbformat>=5.0.0",
+    "nbconvert>=7.0.0",
+]
+
+[project.scripts]
+scrape-reviews = "scripts.scrape_playstore:main"
+setup-oracle = "scripts.oracle_setup:create_tables"
+load-data = "scripts.load_data:main"
+
+[project.urls]
+Homepage = "https://github.com/yourusername/customer-experience-analytics"
+Repository = "https://github.com/yourusername/customer-experience-analytics"
+Documentation = "https://github.com/yourusername/customer-experience-analytics#readme"
+Issues = "https://github.com/yourusername/customer-experience-analytics/issues"
 
 [tool.setuptools.packages.find]
 where = ["src"]
+
+[tool.setuptools.package-data]
+"*" = ["*.txt", "*.md", "*.yml", "*.yaml"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py"]
+python_classes = ["Test*"]
+python_functions = ["test_*"]
+addopts = [
+    "--strict-markers",
+    "--strict-config",
+    "--verbose",
+    "--tb=short",
+    "--cov=src",
+    "--cov-report=term-missing",
+    "--cov-report=html",
+]
+markers = [
+    "slow: marks tests as slow (deselect with '-m \"not slow\"')",
+    "integration: marks tests as integration tests",
+    "unit: marks tests as unit tests",
+]
+
+[tool.black]
+line-length = 88
+target-version = ['py38']
+include = '\.pyi?$'
+extend-exclude = '''
+/(
+  # directories
+  \.eggs
+  | \.git
+  | \.hg
+  | \.mypy_cache
+  | \.tox
+  | \.venv
+  | build
+  | dist
+)/
+'''
+
+[tool.flake8]
+max-line-length = 88
+extend-ignore = ["E203", "W503"]
+exclude = [
+    ".git",
+    "__pycache__",
+    "build",
+    "dist",
+    ".venv",
+    ".eggs",
+    "*.egg",
+]
+
+[tool.mypy]
+python_version = "3.8"
+warn_return_any = true
+warn_unused_configs = true
+disallow_untyped_defs = true
+disallow_incomplete_defs = true
+check_untyped_defs = true
+disallow_untyped_decorators = true
+no_implicit_optional = true
+warn_redundant_casts = true
+warn_unused_ignores = true
+warn_no_return = true
+warn_unreachable = true
+strict_equality = true
+
+[[tool.mypy.overrides]]
+module = [
+    "google_play_scraper.*",
+    "oracledb.*",
+    "cx_Oracle.*",
+    "transformers.*",
+    "torch.*",
+    "nltk.*",
+    "wordcloud.*",
+]
+ignore_missing_imports = true
+
+[tool.coverage.run]
+source = ["src"]
+omit = [
+    "*/tests/*",
+    "*/test_*",
+    "*/__pycache__/*",
+    "*/venv/*",
+    "*/.venv/*",
+]
+
+[tool.coverage.report]
+exclude_lines = [
+    "pragma: no cover",
+    "def __repr__",
+    "if self.debug:",
+    "if settings.DEBUG",
+    "raise AssertionError",
+    "raise NotImplementedError",
+    "if 0:",
+    "if __name__ == .__main__.:",
+    "class .*\\bProtocol\\):",
+    "@(abc\\.)?abstractmethod",
+]
